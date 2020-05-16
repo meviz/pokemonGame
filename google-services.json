@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "856068984937",
+    "firebase_url": "https://pokedex-native-40896.firebaseio.com",
+    "project_id": "pokedex-native-40896",
+    "storage_bucket": "pokedex-native-40896.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:856068984937:android:3197cb2edd5521ae2592f8",
+        "android_client_info": {
+          "package_name": "com.pokedex.pokedexapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "856068984937-ncsatrnhofsn86su8pnrlp5kpcvusr2m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYXwCe9Ua6OfGWk5bxdie1rx_Gp5zeaTo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "856068984937-ncsatrnhofsn86su8pnrlp5kpcvusr2m.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "856068984937-fgvuchc6d1d617mvlsbi9pvdtu51d3rd.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.pokedex.pokedexapp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
