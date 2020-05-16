@@ -1,5 +1,5 @@
 import React from 'react';
-import { SafeAreaView, TouchableHighlight, Image, StyleSheet, Text, View, TextInput } from 'react-native';
+import { SafeAreaView, Platform, TouchableHighlight, Image, StyleSheet, Text, View, TextInput } from 'react-native';
 import { Router, Scene } from 'react-native-router-flux';
 
 import Style from '../style/style';
@@ -12,13 +12,14 @@ export default class PokedexLayout extends React.Component {
     render(){
         return (
             <React.Fragment>
-                <View style={styles.viewStyle}>
+                
+                <SafeAreaView style={styles.viewStyle}>
                     <PokedexHead/>
                     <PokedexBody>
                         {this.props.children}
                     </PokedexBody>
                     <PokedexFooter/>
-                    </View>
+                    </SafeAreaView>
             </React.Fragment> 
         );
     } 
@@ -29,6 +30,7 @@ const styles = StyleSheet.create({
       flex:1,
       flexDirection:'column',
       justifyContent:'space-between',
+      paddingTop: Platform.OS === 'android' ? 35 : 0
     }
   });
 

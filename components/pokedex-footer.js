@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
         backgroundColor:'#f03737',
         position:'relative',
         bottom:0,
-        height:50,
+        height:80,
         width:'100%',
     }
 });

@@ -1,5 +1,5 @@
 import React from 'react';
-import { SafeAreaView, TouchableHighlight, Image, StyleSheet, Text, View, TextInput, ScrollView, Alert } from 'react-native';
+import { SafeAreaView, Platform, TouchableHighlight, Image, StyleSheet, Text, View, TextInput, ScrollView, Alert } from 'react-native';
 import * as firebase from 'firebase';
 
 import Style from '../style/style';
@@ -155,6 +155,7 @@ export default class Hunting extends React.Component {
 
     pressedAttack(s){
         var self=this;
+        var bindex;
         
         if(this.state.isPokemons && this.state.isMyPokemons){
             if(this.state.battlePokemon.currentHp!=0){
@@ -163,6 +164,7 @@ export default class Hunting extends React.Component {
                 this.setState({
                     preyPokemon:tp,
                 });
+
                 if(tp.currentHp!=0){
                     setTimeout(function(){
                         var bp;
@@ -177,6 +179,22 @@ export default class Hunting extends React.Component {
                             battlePokemon:bp,
                         });
                         self.setState({hideAllButton:false});
+
+                        bindex = self.state.myPokemonList.findIndex(function(p){
+                            return p.id == self.state.battlePokemon.id;
+                        });
+        
+                        firebase.database()
+                        .ref('/myPokemons/'+bindex)
+                        .update({
+                            currentHp: self.state.battlePokemon.currentHp,
+                        })
+                        .then(() => {
+                            this.hideAllView();
+                            this.setState({
+                                showLostView:true,
+                            });
+                        });
                         
                         if(self.state.battlePokemon.currentHp==0){
                             var zero = self.state.myPokemonList.filter(function(item){return item.currentHp == 0});
@@ -752,19 +770,21 @@ export default class Hunting extends React.Component {
     render(){
         return (
             <React.Fragment>
-                    <SafeAreaView style={styles.viewStyle}>
-                            {this.startView()}
-                            {this.findView()}
-                            {this.battleView()}
-                            {this.findLoadingView()}
-                            {this.chooseView()}
-                            {this.catchWaitView()}
-                            {this.catchSuccessView()}
-                            {this.catchFailView()}
-                            {/* {this.lostGameView()} */}
-                            {this.wonGameView()}
-                    </SafeAreaView>
-                <PokedexFooter/>
+                <SafeAreaView style={styles.viewStyle}>
+                        {this.startView()}
+                        {this.findView()}
+                        {this.battleView()}
+                        {this.findLoadingView()}
+                        {this.chooseView()}
+                        {this.catchWaitView()}
+                        {this.catchSuccessView()}
+                        {this.catchFailView()}
+                        {/* {this.lostGameView()} */}
+                        {this.wonGameView()}
+                </SafeAreaView>
+                <SafeAreaView>
+                        <PokedexFooter/>
+                </SafeAreaView>
             </React.Fragment> 
         );
     } 
@@ -1190,5 +1210,6 @@ const styles = StyleSheet.create({
     viewStyle:{
         flexGrow:1,
         flex:1,
+        paddingTop: Platform.OS === 'android' ? 35 : 0
     },
 });
